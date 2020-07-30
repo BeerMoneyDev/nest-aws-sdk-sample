@@ -9,16 +9,16 @@ describe('S3ManagerService', () => {
   let s3: S3;
 
   beforeEach(async () => {
-const module: TestingModule = await Test.createTestingModule({
-  providers: [
-    S3ManagerService,
-    createAwsServiceMock(S3, {
-      useValue: {
-        listObjectsV2: () => null,
-      }
-    }),
-  ],
-}).compile();
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        S3ManagerService,
+        createAwsServiceMock(S3, {
+          useValue: {
+            listObjectsV2: () => null,
+          }
+        }),
+      ],
+    }).compile();
 
     service = module.get(S3ManagerService);
     s3 = getAwsServiceMock(module, S3);

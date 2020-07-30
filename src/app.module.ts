@@ -7,13 +7,18 @@ import { S3ManagerModule } from './s3-manager/s3-manager.module';
 
 @Module({
   imports: [
-    AwsSdkModule.forRoot({
+    AwsSdkModule.forRootAsync({
       defaultServiceOptions: {
-        useValue: {
-          credentials: new SharedIniFileCredentials({
-            profile: 'kerryritter',
-          }),
-        },
+        useFactory: () => {
+          if (process.env.LAMBDA_TASK_ROOT && process.env.AWS_EXECUTION_ENV) {
+            return {};
+          } 
+          return {
+            credentials: new SharedIniFileCredentials({
+              profile: 'personal',
+            }),
+          };
+        }
       },
     }),
     S3ManagerModule,

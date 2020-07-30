@@ -9,6 +9,6 @@ export class S3ManagerController {
 
   @Get()
   async listBucketContents() {
-    return await this.s3Manager.listBucketContents('kerryritter-deploy-bucket');
+    return await this.s3Manager.listBucketContents('kerryritter-test-bucket');
   }
 }
